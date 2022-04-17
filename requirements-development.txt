@@ -1,0 +1,9 @@
+-r requirements.txt
+
+click
+requests
+pendulum
+
+# Test and lint tools
+
+# Doc tools
