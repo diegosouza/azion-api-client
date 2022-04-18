@@ -92,7 +92,6 @@ class Client(requests.Session):
 
 
     def edge_applications(self):
-        payload = {'page_size': 100}
         url = self.build_url('edge_applications')
         response = self.get(url, params = DEFAULT_PARAMS)
         json = decode_json(response, 200)
@@ -102,7 +101,7 @@ class Client(requests.Session):
 
     def get_edge_application(self, edge_application_id):
         url = self.build_url('edge_applications', edge_application_id)
-        response = self.get(url)
+        response = self.get(url, params = DEFAULT_PARAMS)
         json = decode_json(response, 200)
 
         return instance_from_data(EdgeApplication, json['results'])
