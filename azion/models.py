@@ -1,4 +1,5 @@
 import pendulum
+import logging
 
 import azion.exceptions as exceptions
 
@@ -29,6 +30,8 @@ def decode_json(response, excepted_status_code):
     if status_code != excepted_status_code:
         if status_code >= 400:
             raise exceptions.handle_error(response)
+
+    logging.debug("response body: %s", response.json())
 
     return response.json()
 

@@ -23,9 +23,11 @@ else:
 def domain_group():
     pass
 
+@click.option('--debug', is_flag=True, help="Debug the api requests.")
 @domain_group.command("domain-list")
 @click.option('--id', type=int)
-def domain_list(id):
+def domain_list(debug, id):
+    client.debugIfEnabled(debug)
     if id is not None:
         domain = client.get_domain(id)
         print(domain)
@@ -33,14 +35,25 @@ def domain_list(id):
         for domain in client.domains():
             print(domain)
 
+@click.option('--debug', is_flag=True, help="Debug the api requests.")
+@domain_group.command("domain-info")
+@click.option('--id', type=int, required=True)
+def domain_info(debug, id):
+    client.debugIfEnabled(debug)
+    domain = client.get_domain(id)
+    pprint(vars(domain))
+
+##############################################################################
 
 @click.group()
 def edge_function_group():
     pass
 
+@click.option('--debug', is_flag=True, help="Debug the api requests.")
 @edge_function_group.command("edge-function-list")
 @click.option('--id', type=int)
-def edge_function_list(id):
+def edge_function_list(debug, id):
+    client.debugIfEnabled(debug)
     if id is not None:
         edge_function = client.get_edge_function(id)
         print(edge_function)
@@ -49,12 +62,15 @@ def edge_function_list(id):
             print(edge_function)
 
 
+@click.option('--debug', is_flag=True, help="Debug the api requests.")
 @edge_function_group.command("edge-function-info")
 @click.option('--id', type=int, required=True)
-def edge_function_info(id):
+def edge_function_info(debug, id):
+    client.debugIfEnabled(debug)
     edge_function = client.get_edge_function(id)
     pprint(vars(edge_function))
 
+##############################################################################
 
 cli = click.CommandCollection(sources=[domain_group, edge_function_group])
 

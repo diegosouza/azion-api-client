@@ -5,8 +5,12 @@ from azion.models import (
     Domain, EdgeApplication, EdgeFunction, ErrorResponses, CacheSettings, Rule, Token,
     as_boolean, decode_json, filter_none, instance_from_data, many_of)
 
-import requests
+from http.client import HTTPConnection
+
 import base64
+import requests
+import logging
+
 
 class Client(requests.Session):
 
@@ -121,7 +125,12 @@ class Client(requests.Session):
         return instance_from_data(EdgeFunction, json['results'])
 
 
-    def debugIfEnabled(self, flag):
+    def debugIfEnabled(self, flag=False):
+        self.debug = flag
+
         if flag:
-            import logging
             logging.basicConfig(level=logging.DEBUG)
+            HTTPConnection.debuglevel = 1
+        else:
+            HTTPConnection.debuglevel = 0
+
