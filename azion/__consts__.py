@@ -1,5 +1,5 @@
 VERSION = '3'
-CLIENT_VERSION = '0.0.1-dev'
+CLIENT_VERSION = '0.0.1.a0'
 PUBLIC_ENDPOINT = 'https://api.azionapi.net'
 USER_AGENT = "azion-api-client/%s" %  CLIENT_VERSION
 
