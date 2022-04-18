@@ -2,7 +2,7 @@ from azion.__consts__ import (
     DEFAULT_PARAMS, PUBLIC_ENDPOINT, USER_AGENT, VERSION)
 
 from azion.models import (
-    Domain, EdgeApplication, EdgeFunction, ErrorResponses, CacheSettings, Rule, Token,
+    Domain, EdgeApplication, EdgeFunction, ErrorResponses, CacheSettings, Origin, Rule, Token,
     as_boolean, decode_json, filter_none, instance_from_data, many_of)
 
 from http.client import HTTPConnection
@@ -107,6 +107,29 @@ class Client(requests.Session):
 
         return instance_from_data(EdgeApplication, json['results'])
 
+
+    def get_edge_application_origins(self, edge_application_id):
+        url = self.build_url(
+                'edge_applications',
+                edge_application_id,
+                'origins')
+
+        response = self.get(url)
+        json = decode_json(response, 200)
+
+        return many_of(Origin, json['results'])
+
+    def get_edge_application_origin(self, edge_application_id, origin_key):
+        url = self.build_url(
+                'edge_applications',
+                edge_application_id,
+                'origins',
+                origin_key) # TODO: report api parameter adjust
+
+        response = self.get(url)
+        json = decode_json(response, 200)
+
+        return instance_from_data(Origin, json['results'])
 
     def edge_functions(self):
         payload = {'page_size': 100}

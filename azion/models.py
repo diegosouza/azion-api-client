@@ -193,6 +193,22 @@ class EdgeApplication(object):
         return '<EdgeApplication [{} ({})]>'.format(self.name,
                                          self.id)
 
+class Origin(object):
+    """Model representing the edge application origin
+    retrieved from the API.
+    """
+
+    def __init__(self, data):
+        self.id = data['origin_id']
+        self.key = data['origin_key']
+        self.name = data['name']
+        self.addresses = data['addresses']
+        self.host_header = data['host_header']
+
+    def __repr__(self):
+        return '<Origin [{} ({})]>'.format(self.name,
+                                         self.key)
+
 class EdgeFunction(object):
     """Model representing the edge function
     retrieved from the API.
