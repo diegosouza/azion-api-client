@@ -8,7 +8,7 @@ from os import path
 
 setup(
     name='azion-api-client',
-    version='0.0.1.a0',
+    version='0.0.1.a1',
     description="A Python API client for Azion management and automation",
     long_description_content_type='text/markdown',
     url='https://github.com/diegosouza/azion-api-client',
