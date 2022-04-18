@@ -69,15 +69,10 @@ def domain_group():
 
 @click.option('--debug', is_flag=True, help="Debug the api requests.")
 @domain_group.command("domain-list")
-@click.option('--id', type=int)
-def domain_list(debug, id):
+def domain_list(debug):
     client.debugIfEnabled(debug)
-    if id is not None:
-        domain = client.get_domain(id)
+    for domain in client.domains():
         print(domain)
-    else:
-        for domain in client.domains():
-            print(domain)
 
 @click.option('--debug', is_flag=True, help="Debug the api requests.")
 @domain_group.command("domain-info")
@@ -95,15 +90,10 @@ def edge_function_group():
 
 @click.option('--debug', is_flag=True, help="Debug the api requests.")
 @edge_function_group.command("edge-function-list")
-@click.option('--id', type=int)
-def edge_function_list(debug, id):
+def edge_function_list(debug):
     client.debugIfEnabled(debug)
-    if id is not None:
-        edge_function = client.get_edge_function(id)
+    for edge_function in client.edge_functions():
         print(edge_function)
-    else:
-        for edge_function in client.edge_functions():
-            print(edge_function)
 
 
 @click.option('--debug', is_flag=True, help="Debug the api requests.")
