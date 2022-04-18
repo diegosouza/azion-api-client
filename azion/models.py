@@ -171,7 +171,9 @@ class Domain(object):
     def __init__(self, data):
         self.id = data['id']
         self.name = data['name']
-        # TODO: implement the rest
+        self.cnames = data['cnames']
+        self.edge_application_id = data['edge_application_id']
+        self.is_active = data['is_active']
 
     def __repr__(self):
         return '<Domain [{} ({})]>'.format(self.name,
